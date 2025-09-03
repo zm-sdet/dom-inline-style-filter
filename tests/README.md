@@ -52,7 +52,7 @@ $O(nlog(N))$ growth for inputs at large filesizes $|F| >> 1e6 \text{ bytes}$.
 
 ### Small file results
 
-$O(c \cdot N), \space c \space \approx \space 4$ growth for inputs at small filesizes $|F| << 1e6\space\text{ bytes}$.
+$O(nlog(N))$ growth for inputs at small filesizes $|F| << 1e6\space\text{ bytes}$.
 
 | Code screenshot demo      | Value                                  |
 | :------------------------ | :------------------------------------- |
@@ -69,3 +69,6 @@ $O(c \cdot N), \space c \space \approx \space 4$ growth for inputs at small file
 | Decay formula             | $1-exp(-23 / 11 \cdot N)$              |
 
 <img src="../assets/236925730-e880fabe-426f-491e-a95f-989536c9e3bc.png" width="539px" />
+
+<!-- `dom-inline-style-filter` -->
+[css-author-style-filter]: https://github.com/1904labs/dom-to-image-more/pull/71
