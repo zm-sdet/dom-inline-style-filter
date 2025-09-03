@@ -1156,11 +1156,10 @@ function spliceActiveCssTextDeclaration(styles, name) {
 
 	styles.inline.cssText = declarations.filter((_, i) => i !== index).join('; ') + ';';
 
-	const isNotDisplayed = name !== 'display' && styles.inline.display === 'none'; 
 	const isEmptyValue = value === '';
 	const isComputedValue = value === styles.computed.getPropertyValue(name);
 
-	if (isNotDisplayed || isEmptyValue || isComputedValue) {
+	if (isEmptyValue || isComputedValue) {
 		styles.context.declarations -= 1;
 	} else {
 		styles.inline.cssText = declarations.join('; ') + ';';
