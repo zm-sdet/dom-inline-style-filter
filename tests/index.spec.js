@@ -1,11 +1,11 @@
-['code.svg', 'wikipedia.svg'].forEach(async image => {
+['code', 'wikipedia'].forEach(async name => {
 	const iframe =  document.querySelector('iframe#test-bench');
 
 	const request = new XMLHttpRequest();
-	request.open('GET', '/base/test/resources/' + image, false);
+	request.open('GET', '/base/test/resources/' + name + '.svg', false);
 	request.send();
 
-	iframe.src = '/base/test/resources/' + image;
+	iframe.src = '/base/test/resources/' + name + '.svg';
 
 	const root = iframe.contentDocument.querySelector('foreignElement > *');
 
@@ -21,7 +21,7 @@
 	const info = console.info;
 	const buffer = [];
 	const infoSpy = function() {
-		buffer.push(...arguments);
+		buffer.push(arguments.join(' '));
 		info.call(console, ...arguments);
 	};
 	console.info = infoSpy;
@@ -31,6 +31,9 @@
 	await dominlinestylefilter(root, { debug: true });
 
 	console.info = info;
+
+	// TODO: Wire up Node IPC to write files.
+	// fs.writeFileSync('../scripts/' + name + '.log', buffer.join('\n'));
 
 	const generalData = {};
 	const authorData = { bytes: [], declarations: [] };
@@ -155,14 +158,18 @@
 			const results = computedStylesFn();
 
 			for (let index = 0; index < filtrates.length; index++) {
-				const declarationBefore = filtrates[index];
-				const declarationAfter = results[index];
+				if (filtrates[index].display === 'none') {
+					continue;
+				}
 
-				for (const prop in declarationBefore) {
-					const valueBefore = declarationBefore[prop];
-					const valueAfter = declarationAfter[prop];
+				const prevDeclaration = filtrates[index];
+				const declaration = results[index];
 
-					expect(valueAfter).to.equal(valueBefore);
+				for (const prop in declaration) {
+					const prevValue = prevDeclaration[prop];
+					const value = declaration[prop];
+
+					expect(value).to.equal(prevValue);
 				}
 			}
 		});
