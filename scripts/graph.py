@@ -5,9 +5,9 @@ from scipy.optimize import curve_fit
 import numpy as np
 
 # Sample log data
-logs = ['code.log', 'wikipedia.log']
+logs = ['code', 'wikipedia']
 for log in logs:
-	p = Path(__file__).with_name(log)
+	p = Path(__file__).with_name(log + '.log')
 	with p.open('r') as file:
 		log_data = file.read()
 
@@ -73,5 +73,6 @@ for log in logs:
 	plt.legend()
 	plt.grid()
 
-	# Show the plot
+	# Show and save the plot
 	plt.show()
+	plt.savefig('../assets/' + log + '-graph.png')
