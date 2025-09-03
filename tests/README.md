@@ -8,7 +8,7 @@ Data was collected from manual testing on the output of the `domtoimage.toSvg` f
 
 ### Large file inputs
 
-$O(nlog(N))$ growth for inputs at large filesizes $|F| >> 1e6 \text{ bytes}$.
+$O(N)$ growth for inputs at large filesizes $|F| >> 1e6 \text{ bytes}$.
 
 | Wikipedia article demo    | Value                                  |
 | :------------------------ | :------------------------------------- |
