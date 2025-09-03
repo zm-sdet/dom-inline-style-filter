@@ -6,14 +6,14 @@ module.exports = function (config) {
 
         files: [
             {
-                pattern: 'test/resources/**/*',
+                pattern: 'tests/data/**/*',
                 included: false,
                 served: true,
             },
 
             'dist/index.min.js',
-            'test/bench.js',
-            'test/index.spec.js',
+            'tests/bench.js',
+            'tests/index.spec.js',
         ],
 
         exclude: [],
